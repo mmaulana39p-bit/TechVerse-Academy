@@ -23,9 +23,9 @@ const floaters  = document.getElementById('floaters');
 
 /* ===== Suara =====
    Taruh file di folder sounds/ (nama file harus sama persis) */
-const bgm      = new Audio('sounds/ambient.mp3');  // musik latar (loop)
-const sfxType  = new Audio('sounds/type.mp3');     // bunyi tiap baris terminal
-const sfxReady = new Audio('sounds/ready.mp3');    // bunyi saat loading selesai
+const bgm      = new Audio('ambient.mp3');  // musik latar (loop)
+const sfxType  = new Audio('type.mp3');     // bunyi tiap baris terminal
+const sfxReady = new Audio('ready.mp3');    // bunyi saat loading selesai
 bgm.loop = true;
 bgm.volume = 0.5;
 
