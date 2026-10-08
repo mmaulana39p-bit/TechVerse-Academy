@@ -21,6 +21,22 @@ const percentEl = document.getElementById('percent');
 const startBtn  = document.getElementById('startBtn');
 const floaters  = document.getElementById('floaters');
 
+/* ===== Suara =====
+   Taruh file di folder sounds/ (nama file harus sama persis) */
+const bgm      = new Audio('sounds/ambient.mp3');  // musik latar (loop)
+const sfxType  = new Audio('sounds/type.mp3');     // bunyi tiap baris terminal
+const sfxReady = new Audio('sounds/ready.mp3');    // bunyi saat loading selesai
+bgm.loop = true;
+bgm.volume = 0.5;
+
+function playSound(audio) {
+  audio.currentTime = 0;
+  audio.play().catch(() => {});   // abaikan error (file tidak ada / diblokir browser)
+}
+
+// Browser hanya mengizinkan suara setelah pengguna menyentuh halaman
+document.addEventListener('click', () => playSound(bgm), { once: true });
+
 /* ===== 1. Efek mengetik pada tagline ===== */
 function typeText(text, i = 0) {
   if (i > text.length) return;
@@ -55,6 +71,7 @@ function addLine(text, done) {
   terminal.appendChild(div);
   // simpan maksimal 5 baris agar tidak meluap
   while (terminal.children.length > 5) terminal.firstChild.remove();
+  playSound(sfxType);
 }
 
 function setProgress(value) {
@@ -64,6 +81,8 @@ function setProgress(value) {
 }
 
 function finish() {
+  bgm.pause();
+  playSound(sfxReady);
   startBtn.classList.add('show');
   if (AUTO_REDIRECT) {
     setTimeout(() => (window.location.href = NEXT_PAGE), REDIRECT_DELAY);
@@ -83,3 +102,4 @@ function step() {
 }
 
 setTimeout(step, 600);
+  
