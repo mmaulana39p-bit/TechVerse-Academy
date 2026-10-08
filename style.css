@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #25252b;
+  --accent: #ff2770;
+  --text: #fff;
+  --slide: 60px;      /* jarak geser elemen saat animasi */
+  --step: 0.1s;       /* jeda antar elemen (efek berurutan) */
+  --wait: 0.7s;       /* tunggu bentuk melengkung bergerak dulu */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ---------- Container ---------- */
+.container {
+  position: relative;
+  width: 750px;
+  max-width: 100%;
+  height: 450px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 25px var(--accent);
+  overflow: hidden;
+}
+
+/* ---------- Bentuk melengkung (bergeser saat pindah form) ---------- */
+.curved-shape {
+  position: absolute;
+  right: 0;
+  top: -5px;
+  height: 600px;
+  width: 850px;
+  background: linear-gradient(45deg, var(--bg), var(--accent));
+  transform: translateX(0) rotate(10deg) skewY(40deg);
+  transform-origin: bottom right;
+  transition: transform 1s ease-in-out;
+}
+
+.curved-shape--left {
+  right: auto;
+  left: 0;
+  background: linear-gradient(315deg, var(--bg), var(--accent));
+  transform: translateX(-120%) rotate(-10deg) skewY(-40deg);
+  transform-origin: bottom left;
+}
+
+.container.active .curved-shape {
+  transform: translateX(120%) rotate(10deg) skewY(40deg);
+}
+
+.container.active .curved-shape--left {
+  transform: translateX(0) rotate(-10deg) skewY(-40deg);
+}
+
+/* ---------- Form ---------- */
+.form-box {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.form-box.login    { left: 0; }
+.form-box.register { right: 0; }
+
+.form-box h2 {
+  font-size: 32px;
+  text-align: center;
+}
+
+.form-box .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin-top: 25px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--text);
+  padding-right: 23px;
+  transition: 0.5s;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+  border-bottom-color: var(--accent);
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
+  color: var(--accent);
+}
+
+.input-box i {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: 18px;
+  transform: translateY(-50%);
+  transition: 0.5s;
+}
+
+.input-box input:focus ~ i,
+.input-box input:valid ~ i {
+  color: var(--accent);
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+  position: relative;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid var(--accent);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(var(--bg), var(--accent), var(--bg), var(--accent));
+  top: -100%;
+  left: 0;
+  z-index: -1;
+  transition: 0.5s;
+}
+
+.btn:hover::before {
+  top: 0;
+}
+
+/* ---------- Link ---------- */
+.regi-link {
+  font-size: 14px;
+  text-align: center;
+  margin: 20px 0 10px;
+}
+
+.regi-link a {
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.regi-link a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Info ---------- */
+.info-content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.info-content.login {
+  right: 0;
+  text-align: right;
+  padding: 0 40px 60px 150px;
+}
+
+.info-content.register {
+  left: 0;
+  text-align: left;
+  padding: 0 150px 60px 40px;
+}
+
+.info-content h2 {
+  text-transform: uppercase;
+  font-size: 36px;
+  line-height: 1.3;
+}
+
+.info-content p {
+  font-size: 16px;
+}
+
+/* =====================================================
+   ANIMASI MUNCUL / HILANG (berurutan lewat variabel --D)
+   ===================================================== */
+.animation {
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* Sembunyikan panel dari keyboard/klik setelah animasi keluar selesai */
+.form-box,
+.info-content {
+  transition: visibility 0s linear 1s;
+}
+
+/* --- Login: tampil secara default --- */
+.form-box.login .animation,
+.info-content.login .animation {
+  transform: translateX(0);
+  opacity: 1;
+  transition-delay: calc(var(--wait) + var(--D) * var(--step));
+}
+
+/* --- Register: tersembunyi secara default (masuk dari kanan) --- */
+.form-box.register,
+.info-content.register {
+  visibility: hidden;
+}
+
+.form-box.register .animation,
+.info-content.register .animation {
+  transform: translateX(var(--slide));
+  opacity: 0;
+  transition-delay: calc(var(--D) * var(--step));
+}
+
+/* --- Saat .active: login keluar ke kiri --- */
+.container.active .form-box.login,
+.container.active .info-content.login {
+  visibility: hidden;
+}
+
+.container.active .form-box.login .animation,
+.container.active .info-content.login .animation {
+  transform: translateX(calc(var(--slide) * -1));
+  opacity: 0;
+  transition-delay: calc(var(--D) * var(--step));
+}
+
+/* --- Saat .active: register masuk --- */
+.container.active .form-box.register,
+.container.active .info-content.register {
+  visibility: visible;
+  transition-delay: var(--wait);
+}
+
+.container.active .form-box.register .animation,
+.container.active .info-content.register .animation {
+  transform: translateX(0);
+  opacity: 1;
+  transition-delay: calc(var(--wait) + var(--D) * var(--step));
+}

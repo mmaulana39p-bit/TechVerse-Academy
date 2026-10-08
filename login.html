@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HASH TECHIE OFFICIAL</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+</head>
+<body>
+  <div class="container" id="container">
+    <div class="curved-shape"></div>
+    <div class="curved-shape curved-shape--left"></div>
+
+    <!-- FORM LOGIN -->
+    <div class="form-box login">
+      <h2 class="animation" style="--D:0">Login</h2>
+      <form action="#">
+        <div class="input-box animation" style="--D:1">
+          <input type="text" id="login-username" autocomplete="username" required>
+          <label for="login-username">Username</label>
+          <i class="bx bxs-user"></i>
+        </div>
+        <div class="input-box animation" style="--D:2">
+          <input type="password" id="login-password" autocomplete="current-password" required>
+          <label for="login-password">Password</label>
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+        <div class="input-box animation" style="--D:3">
+          <button class="btn" type="submit">Login</button>
+        </div>
+        <div class="regi-link animation" style="--D:4">
+          <p>Belum punya akun? <a href="#" id="to-register">Sign up</a></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="info-content login">
+      <h2 class="animation" style="--D:0">Welcome back!</h2>
+      <p class="animation" style="--D:1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, rem?</p>
+    </div>
+
+    <!-- FORM REGISTER -->
+    <div class="form-box register">
+      <h2 class="animation" style="--D:0">Register</h2>
+      <form action="#">
+        <div class="input-box animation" style="--D:1">
+          <input type="text" id="register-username" autocomplete="username" required>
+          <label for="register-username">Username</label>
+          <i class="bx bxs-user"></i>
+        </div>
+        <div class="input-box animation" style="--D:2">
+          <input type="password" id="register-password" autocomplete="new-password" required>
+          <label for="register-password">Password</label>
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+        <div class="input-box animation" style="--D:3">
+          <button class="btn" type="submit">Register</button>
+        </div>
+        <div class="regi-link animation" style="--D:4">
+          <p>Sudah punya akun? <a href="#" id="to-login">Sign in</a></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="info-content register">
+      <h2 class="animation" style="--D:0">Welcome!</h2>
+      <p class="animation" style="--D:1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, rem?</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
